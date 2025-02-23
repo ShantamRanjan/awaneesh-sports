@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="web icon" href="/img/newicon.jpeg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order - Awaneesh Sports</title>
+    <style>
+        :root {
+            --primary-color: #005bb5;
+            --secondary-color: #0082c3;
+            --accent-color: #ff6b6b;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --gray-light: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .track-order-container {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        .section-title {
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .track-form {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--gray-light);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .track-button {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .track-button:hover {
+            background: var(--secondary-color);
+        }
+
+        .order-status {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .status-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .status-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gray-light);
+            z-index: 1;
+        }
+
+        .step {
+            position: relative;
+            z-index: 2;
+            background: var(--white);
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--gray-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+
+        .step.active .step-icon {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .step-label {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .step.active .step-label {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 15px;
+            }
+
+            .main-content {
+                padding: 0 15px;
+            }
+
+            .track-order-container {
+                padding: 20px;
+            }
+
+            .status-steps {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .status-steps::before {
+                left: 15px;
+                width: 2px;
+                height: 100%;
+                top: 0;
+            }
+
+            .step {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                padding: 0;
+            }
+
+            .step-icon {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="tail3.html" class="logo">Awaneesh Sports</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="track-order-container">
+            <h1 class="section-title">Track Your Order</h1>
+            
+            <form class="track-form">
+                <div class="form-group">
+                    <label class="form-label" for="order-number">Order Number</label>
+                    <input type="text" id="order-number" class="form-input" placeholder="Enter your order number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="Enter your email address" required>
+                </div>
+
+                <button type="submit" class="track-button">Track Order</button>
+            </form>
+
+            <div class="order-status">
+                <h2 class="section-title">Order Status</h2>
+                
+                <div class="status-steps">
+                    <div class="step active">
+                        <div class="step-icon">1</div>
+                        <div class="step-label">Order Placed</div>
+                    </div>
+                    
+                    <div class="step active">
+                        <div class="step-icon">2</div>
+                        <div class="step-label">Processing</div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-icon">3</div>
+                        <div class="step-label">Shipped</div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-icon">4</div>
+                        <div class="step-label">Delivered</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.querySelector('.track-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your order tracking logic here
+            alert('Order tracking functionality would be implemented here');
+        });
+    </script>
+</body>
+</html>

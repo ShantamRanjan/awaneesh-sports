@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="web icon" href="/img/newicon.jpeg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awaneesh sports</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --accent: #dbeafe;
+            --text: #1f2937;
+            --light: #f3f4f6;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero-categories {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .cart-panel {
+            width: 100%;
+            right: -100%;
+        }
+    
+    .hero {
+        position: relative;
+        height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .slide.active {
+        opacity: 1;
+    }
+
+    .slide::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .slider-controls {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+    }
+
+    .slider-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .slider-dot.active {
+        background: white;
+    }
+
+    .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        z-index: 10;
+        color: white;
+        font-size: 24px;
+        border: none;
+    }
+
+    .slider-arrow:hover {
+        background: rgba(255, 255, 255, 0.4);
+    }
+
+    .slider-arrow.prev {
+        left: 20px;
+    }
+
+    .slider-arrow.next {
+        right: 20px;
+    }
+
+
+    .hero-content {
+        max-width: 800px;
+        padding: 30px;
+    }
+
+    .hero-title {
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+        /* Search Section */
+        .search-section {
+            max-width: 1200px;
+            margin: -2rem auto 0;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .search-input {
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            width: 100%;
+        }
+
+        .search-button {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background: var(--secondary);
+        }
+
+        /* Trainers Grid */
+        .trainers-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .trainer-card {
+            background: var(--white);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .trainer-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .trainer-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .trainer-info {
+            padding: 1.5rem;
+        }
+
+        .trainer-name {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .trainer-specialty {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .trainer-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .book-button {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .book-button:hover {
+            background: var(--secondary);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--white);
+            width: 90%;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 1rem;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .calendar {
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calendar-day {
+            padding: 0.5rem;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+        }
+
+        .calendar-day.available {
+            background: var(--accent);
+        }
+
+        .calendar-day.selected {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+
+            .search-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;     /* Take full width of container */
+            padding: 10px 40px 10px 15px;
+            border: 2px solid var(--gray-light);
+            border-radius: 40px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 35px;    /* Adjust icon position */
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="tail3.html" class="logo">Awaneesh Sports</a>
+            <ul class="nav-menu">
+                <li><a href="tail3.html" class="nav-link">Home</a></li>
+                <li><a href="#" class="nav-link">Services</a></li>
+                <li><a href="#" class="nav-link">Book a Court</a></li>
+                <li><a href="index.html" class="nav-link">Sign in</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="slider">
+            <div class="slide active" style="background-image: url('/img/t1.jpeg')"></div>
+            <div class="slide" style="background-image: url('/img/t2.jpeg')"></div>
+            <div class="slide" style="background-image: url('/img/t3.jpeg')"></div>
+            <div class="slide" style="background-image: url('/img/t4.jpeg')"></div>
+        </div>
+        <button class="slider-arrow prev">&#10094;</button>
+        <button class="slider-arrow next">&#10095;</button>
+        <div class="slider-controls">
+            <div class="slider-dot active"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to Awaneesh Sports</h1>
+            <p class="hero-subtitle">built your dream physique</p>
+        </div>
+    </section>
+
+    <section class="search-section">
+        <form class="search-form">
+            <select class="search-input">
+                <option value="">Select Sport</option>
+                <option value="tennis">Tennis</option>
+                <option value="basketball">Basketball</option>
+                <option value="football">Football</option>
+                <option value="cricket">Cricket</option>
+            </select>
+            <select class="search-input">
+                <option value="">Select Location</option>
+                <option value="mumbai">Mumbai</option>
+                <option value="delhi">Delhi</option>
+                <option value="bangalore">Bangalore</option>
+            </select>
+            <input type="date" class="search-input" placeholder="Select Date">
+            <button type="submit" class="search-button">Find Trainers</button>
+        </form>
+    </section>
+
+    <section class="trainers-section">
+        <h2 class="section-title">Featured Trainers</h2>
+        <div class="trainers-grid">
+            <!-- Trainer Cards -->
+        </div>
+    </section>
+
+    <!-- Trainer Bio Modal -->
+    <div id="trainerModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <div id="trainerBio"></div>
+            <div id="availability"></div>
+        </div>
+    </div>
+
+    <script>
+        // Sample trainer data
+        const trainers = [
+    {
+        id: 1,
+        name: "John Smith",
+        specialty: "Tennis Coach",
+        sport: "tennis",
+        location: "mumbai",
+        experience: "10+ years",
+        rating: 4.8,
+        students: 150,
+        image: "img/t5.jpeg",
+        bio: "Former national player with extensive coaching experience...",
+        availability: ["2025-02-12", "2025-02-13", "2025-02-15"]
+    },
+    {
+        id: 2,
+        name: "Sarah Johnson",
+        specialty: "Basketball Trainer",
+        sport: "basketball",
+        location: "delhi",
+        experience: "8 years",
+        rating: 4.9,
+        students: 120,
+        image: "/api/placeholder/300/250",
+        bio: "Professional basketball player turned coach...",
+        availability: ["2025-02-14", "2025-02-16", "2025-02-17"]
+    },
+    {
+        id: 3,
+        name: "Michael Chen",
+        specialty: "Football Coach",
+        sport: "football",
+        location: "bangalore",
+        experience: "12 years",
+        rating: 4.7,
+        students: 200,
+        image: "/api/placeholder/300/250",
+        bio: "UEFA licensed coach with focus on youth development...",
+        availability: ["2025-02-13", "2025-02-15", "2025-02-18"]
+    }
+];
+
+// Function to render trainers
+function renderTrainers(filteredTrainers) {
+    const trainersGrid = document.querySelector('.trainers-grid');
+    trainersGrid.innerHTML = ''; // Clear existing trainers
+    
+    if (filteredTrainers.length === 0) {
+        trainersGrid.innerHTML = '<p class="no-results">No trainers found matching your criteria.</p>';
+        return;
+    }
+
+    filteredTrainers.forEach(trainer => {
+        const trainerCard = document.createElement('div');
+        trainerCard.className = 'trainer-card';
+        trainerCard.innerHTML = `
+            <img src="${trainer.image}" alt="${trainer.name}" class="trainer-image">
+            <div class="trainer-info">
+                <h3 class="trainer-name">${trainer.name}</h3>
+                <p class="trainer-specialty">${trainer.specialty}</p>
+                <div class="trainer-stats">
+                    <span><i class="fas fa-star"></i> ${trainer.rating}</span>
+                    <span><i class="fas fa-user-graduate"></i> ${trainer.students} students</span>
+                    <span><i class="fas fa-clock"></i> ${trainer.experience}</span>
+                </div>
+                <button class="book-button" onclick="showTrainerBio(${trainer.id})">View Profile & Book</button>
+            </div>
+        `;
+        trainersGrid.appendChild(trainerCard);
+    });
+}
+
+// Function to filter trainers
+function filterTrainers(sport, location, date) {
+    return trainers.filter(trainer => {
+        const matchesSport = !sport || trainer.sport === sport;
+        const matchesLocation = !location || trainer.location === location;
+        const matchesDate = !date || trainer.availability.includes(date);
+        return matchesSport && matchesLocation && matchesDate;
+    });
+}
+
+// Add event listener to search form
+document.querySelector('.search-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const sport = this.querySelector('select:nth-child(1)').value;
+    const location = this.querySelector('select:nth-child(2)').value;
+    const date = this.querySelector('input[type="date"]').value;
+    
+    const filteredTrainers = filterTrainers(sport, location, date);
+    renderTrainers(filteredTrainers);
+});
+
+// Initial render of all trainers
+renderTrainers(trainers);
+
+        // Modal functionality
+        const modal = document.getElementById('trainerModal');
+        const closeModal = document.querySelector('.close-modal');
+
+        function showTrainerBio(trainerId) {
+            const trainer = trainers.find(t => t.id === trainerId);
+            const bioDiv = document.getElementById('trainerBio');
+            const availabilityDiv = document.getElementById('availability');
+
+            bioDiv.innerHTML = `
+                <h2>${trainer.name}</h2>
+                <p>${trainer.bio}</p>
+                <h3>Availability</h3>
+            `;
+
+            // Create calendar
+            const calendar = document.createElement('div');
+            calendar.className = 'calendar';
+            
+            // Add available dates
+            trainer.availability.forEach(date => {
+                const day = document.createElement('div');
+                day.className = 'calendar-day available';
+                day.textContent = new Date(date).getDate();
+                day.onclick = () => selectDate(day);
+                calendar.appendChild(day);
+            });
+
+            availabilityDiv.innerHTML = '';
+            availabilityDiv.appendChild(calendar);
+
+            modal.style.display = 'block';
+        }
+
+        function selectDate(dayElement) {
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.classList.remove('selected');
+            });
+            dayElement.classList.add('selected');
+        }
+
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        const productSlider = document.getElementById('productSlider');
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            const prevButton = document.querySelector('.slider-arrow.prev');
+            const nextButton = document.querySelector('.slider-arrow.next');
+            let currentSlide = 0;
+            let slideInterval;
+        
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                currentSlide = (index + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+        
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+        
+            function previousSlide() {
+                showSlide(currentSlide - 1);
+            }
+        
+            function startSlideShow() {
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                }
+                slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            }
+        
+            // Event listeners for manual controls
+            nextButton.addEventListener('click', () => {
+                nextSlide();
+                startSlideShow(); // Reset timer when manually changed
+            });
+        
+            prevButton.addEventListener('click', () => {
+                previousSlide();
+                startSlideShow(); // Reset timer when manually changed
+            });
+        
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                    startSlideShow(); // Reset timer when manually changed
+                });
+            });
+        
+            // Start the automatic slideshow
+            startSlideShow();
+        
+            // Pause slideshow when hovering over controls
+            const sliderControls = document.querySelector('.slider-controls');
+            sliderControls.addEventListener('mouseenter', () => clearInterval(slideInterval));
+            sliderControls.addEventListener('mouseleave', startSlideShow);
+        });
+        // Enhance the modal content to include a booking form
+        function showTrainerBio(trainerId) {
+            const trainer = trainers.find(t => t.id === trainerId);
+            // Store trainer data in localStorage to access it on profile page
+            localStorage.setItem('selectedTrainer', JSON.stringify(trainer));
+            // Redirect to trainer profile page
+            window.location.href = 'trainerprofile.html';
+        }
+
+    bioDiv.innerHTML = `
+        <h2>${trainer.name}</h2>
+        <p>${trainer.bio}</p>
+        <h3>Select Date & Time</h3>
+    `;
+
+    // Create calendar
+    const calendar = document.createElement('div');
+    calendar.className = 'calendar';
+    
+    // Add available dates
+    trainer.availability.forEach(date => {
+        const day = document.createElement('div');
+        day.className = 'calendar-day available';
+        day.textContent = new Date(date).getDate();
+        day.setAttribute('data-date', date);
+        day.onclick = () => selectDate(day);
+        calendar.appendChild(day);
+    });
+
+    // Create booking form
+    const bookingForm = document.createElement('div');
+    bookingForm.innerHTML = `
+        <form id="bookingForm" class="booking-form" style="margin-top: 20px; display: none;">
+            <select id="timeSlot" class="search-input" style="margin-bottom: 10px;">
+                <option value="">Select Time</option>
+                <option value="09:00">09:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="14:00">02:00 PM</option>
+                <option value="15:00">03:00 PM</option>
+                <option value="16:00">04:00 PM</option>
+            </select>
+            <input type="text" id="clientName" placeholder="Your Name" class="search-input" style="margin-bottom: 10px;" required>
+            <input type="email" id="clientEmail" placeholder="Your Email" class="search-input" style="margin-bottom: 10px;" required>
+            <input type="tel" id="clientPhone" placeholder="Your Phone" class="search-input" style="margin-bottom: 10px;" required>
+            <button type="submit" class="book-button">Confirm Booking</button>
+        </form>
+    `;
+
+    availabilityDiv.innerHTML = '';
+    availabilityDiv.appendChild(calendar);
+    availabilityDiv.appendChild(bookingForm);
+
+    modal.style.display = 'block';
+
+    // Handle booking form submission
+    const form = document.getElementById('bookingForm');
+    form.addEventListener('submit', (e) => handleBookingSubmission(e, trainer));
+
+
+// Function to handle date selection
+function selectDate(dayElement) {
+    document.querySelectorAll('.calendar-day').forEach(day => {
+        day.classList.remove('selected');
+    });
+    dayElement.classList.add('selected');
+    
+    // Show booking form when date is selected
+    const bookingForm = document.getElementById('bookingForm');
+    bookingForm.style.display = 'block';
+}
+
+// Function to handle booking submission
+function handleBookingSubmission(event, trainer) {
+    event.preventDefault();
+    
+    const selectedDate = document.querySelector('.calendar-day.selected');
+    if (!selectedDate) {
+        alert('Please select a date');
+        return;
+    }
+
+    const formData = {
+        trainerId: trainer.id,
+        trainerName: trainer.name,
+        date: selectedDate.getAttribute('data-date'),
+        time: document.getElementById('timeSlot').value,
+        clientName: document.getElementById('clientName').value,
+        clientEmail: document.getElementById('clientEmail').value,
+        clientPhone: document.getElementById('clientPhone').value
+    };
+
+    // Validate form data
+    if (!formData.time) {
+        alert('Please select a time slot');
+        return;
+    }
+
+    // Here you would typically send this data to your backend
+    // For now, we'll just show a success message
+    showBookingConfirmation(formData);
+}
+
+// Function to show booking confirmation
+function showBookingConfirmation(bookingData) {
+    const availabilityDiv = document.getElementById('availability');
+    availabilityDiv.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+            <i class="fas fa-check-circle" style="color: green; font-size: 48px;"></i>
+            <h3 style="margin: 20px 0;">Booking Confirmed!</h3>
+            <p>Thank you ${bookingData.clientName}!</p>
+            <p>Your session with ${bookingData.trainerName} is scheduled for:</p>
+            <p style="font-weight: bold;">${new Date(bookingData.date).toLocaleDateString()} at ${bookingData.time}</p>
+            <p>A confirmation email has been sent to ${bookingData.clientEmail}</p>
+            <button onclick="modal.style.display='none'" class="book-button" style="margin-top: 20px;">Close</button>
+        </div>
+    `;
+}
+
+// Add CSS styles for the booking form
+const styles = document.createElement('style');
+styles.textContent = `
+    .booking-form {
+        margin-top: 20px;
+    }
+    .booking-form input,
+    .booking-form select {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+    }
+    .calendar {
+        margin-bottom: 20px;
+    }
+`;
+document.head.appendChild(styles);
+
+
+        
+    </script>
+</body>
+</html>

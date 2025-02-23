@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awaneesh Sports</title>
+    <script src="https://kit.fontawesome.com/79d8a0ebfd.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #005bb5;
+            --secondary-color: #0082c3;
+            --accent-color: #ff6b6b;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --gray-light: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        .product-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .image-gallery {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .thumbnail:hover, .thumbnail.active {
+            opacity: 1;
+        }
+
+        .product-details {
+            padding: 20px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            text-decoration: none;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .product-title {
+            font-size: 32px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--text-light);
+            font-size: 20px;
+        }
+
+        .discount-badge {
+            background: var(--accent-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            color: #ffd700;
+        }
+
+        .reviews-count {
+            color: var(--text-light);
+        }
+
+        .description {
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .size-selector {
+            margin-bottom: 20px;
+        }
+
+        .size-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .size-option {
+            padding: 8px 16px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .size-option.selected {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quantity-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: var(--gray-light);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .quantity-display {
+            width: 50px;
+            height: 36px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            line-height: 36px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .offers-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--gray-light);
+            border-radius: 8px;
+        }
+
+        .offers-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .offers-list {
+            list-style: none;
+        }
+
+        .offer-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .offer-icon {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr;
+            }
+
+            .main-image {
+                height: 300px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <div class="image-gallery">
+            <img src="" alt="Product" class="main-image" id="mainImage">
+            <div class="thumbnail-container" id="thumbnailContainer">
+                <!-- Thumbnails will be added here by JavaScript -->
+            </div>
+        </div>
+
+        <div class="product-details">
+            <a href="#" class="back-button" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i>
+                Back to Products
+            </a>
+            <h1 class="product-title" id="productTitle"></h1>
+            
+            <div class="product-price">
+                <span id="currentPrice"></span>
+                <span class="original-price" id="originalPrice"></span>
+                <span class="discount-badge" id="discountBadge"></span>
+            </div>
+
+            <div class="rating">
+                <div class="stars" id="starsContainer"></div>
+                <span class="reviews-count" id="reviewsCount"></span>
+            </div>
+
+            <p class="description" id="productDescription"></p>
+
+            <div class="size-selector">
+                <label class="size-label">Select Size</label>
+                <div class="size-options" id="sizeOptions">
+                    <!-- Size options will be added here by JavaScript -->
+                </div>
+            </div>
+
+            <div class="quantity-selector">
+                <button class="quantity-btn" onclick="updateQuantity(-1)">-</button>
+                <div class="quantity-display" id="quantityDisplay">1</div>
+                <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
+                <button class="btn btn-secondary" onclick="buyNow()">Buy Now</button>
+            </div>
+
+            <div class="offers-section">
+                <h3 class="offers-title">Available Offers</h3>
+                <ul class="offers-list" id="offersList">
+                    <!-- Offers will be added here by JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get product ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        // Product data (in real application, this would come from a database)
+        const products = {
+            1: {
+                name: "Professional Tennis Racket",
+                currentPrice: 199.99,
+                originalPrice: 249.99,
+                discount: 20,
+                rating: 4.5,
+                reviews: 128,
+                description: "Professional grade tennis racket featuring advanced carbon fiber technology for superior control and power. Perfect for competitive players looking to elevate their game.",
+                sizes: ["27 inch", "27.5 inch", "28 inch"],
+                images: [
+                    "/img/racketprod.jpg",
+                    "/img/racketprod.jpg",
+                    "/img/racketprod.jpg"
+                ],
+                offers: [
+                    "Free shipping on orders over $50",
+                    "10% off for first-time customers",
+                    "Extended 2-year warranty available",
+                    "EMI available on selected cards"
+                ]
+            },
+            2: {
+                name: "Premium Basketball",
+                currentPrice: 89.99,
+                originalPrice: 119.99,
+                discount: 25,
+                rating: 4.8,
+                reviews: 95,
+                description: "Professional grade basketball with superior grip and durability. Official size and weight, perfect for both indoor and outdoor courts.",
+                sizes: ["Size 5", "Size 6", "Size 7"],
+                images: [
+                    "/img/basketball.jpeg",
+                    "/img/basketball.jpeg",
+                    "/img/basketball.jpeg"
+                ],
+                offers: [
+                    "Free shipping on orders over $50",
+                    "Buy 2 get 1 free on accessories",
+                    "1-year warranty included",
+                    "EMI available on selected cards"
+                ]
+            }
+            // Add more products as needed
+        };
+
+        const product = products[productId];
+
+        // Initialize page content
+        function initializeProduct() {
+            if (!product) {
+                alert('Product not found');
+                return;
+            }
+
+            document.getElementById('productTitle').textContent = product.name;
+            document.getElementById('currentPrice').textContent = `$${product.currentPrice}`;
+            document.getElementById('originalPrice').textContent = `$${product.originalPrice}`;
+            document.getElementById('discountBadge').textContent = `${product.discount}% OFF`;
+            document.getElementById('productDescription').textContent = product.description;
+            
+            // Initialize main image
+            document.getElementById('mainImage').src = product.images[0];
+            
+            // Initialize thumbnails
+            const thumbnailContainer = document.getElementById('thumbnailContainer');
+            product.images.forEach((img, index) => {
+                const thumbnail = document.createElement('img');
+                thumbnail.src = img;
+                thumbnail.classList.add('thumbnail');
+                if (index === 0) thumbnail.classList.add('active');
+                thumbnail.onclick = () => updateMainImage(img, index);
+                thumbnailContainer.appendChild(thumbnail);
+            });
+
+            // Initialize stars
+            const starsContainer = document.getElementById('starsContainer');
+            for (let i = 0; i < 5; i++) {
+                const star = document.createElement('i');
+                star.classList.add('fas', 'fa-star');
+                if (i >= Math.floor(product.rating)) {
+                    star.style.opacity = '0.3';
+                }
+                starsContainer.appendChild(star);
+            }
+            document.getElementById('reviewsCount').textContent = `(${product.reviews} Reviews)`;
+
+            // Initialize size options
+            const sizeOptions = document.getElementById('sizeOptions');
+            product.sizes.forEach(size => {
+                const sizeOption = document.createElement('div');
+                sizeOption.classList.add('size-option');
+                sizeOption.textContent = size;
+                sizeOption.onclick = () => selectSize(sizeOption);
+                sizeOptions.appendChild(sizeOption);
+            });
+
+            // Initialize offers
+            const offersList = document.getElementById('offersList');
+            product.offers.forEach(offer => {
+                const li = document.createElement('li');
+                li.classList.add('offer-item');
+                li.innerHTML = `
+                    <i class="fas fa-tag offer-icon"></i>
+                    <span>${offer}</span>
+                `;
+                offersList.appendChild(li);
+            });
+        }
+
+        function updateMainImage(src, index) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+            document.querySelectorAll('.thumbnail')[index].classList.add('active');
+        }
+
+        function selectSize(element) {
+            document.querySelectorAll('.size-option').forEach(option => option.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        let quantity = 1;
+        function updateQuantity(change) {
+            quantity = Math.max(1, quantity + change);
+            document.getElementById('quantityDisplay').textContent = quantity;
+        }
+
+        function addToCart() {
+            const selectedSize = document.querySelector('.size-option.selected');
+            if (!selectedSize) {
+                alert('Please select a size');
+                return;
+            }
+            alert('Product added to cart!');
+            // Implement cart functionality here
+        }
+
+        function buyNow() {
+            const selectedSize = document.querySelector('.size-option.selected');
+            if (!selectedSize) {
+                alert('Please select a size');
+                return;
+            }
+            window.location.href = 'checkout.html';
+            // Implement checkout functionality here
+        }
+
+        // Initialize the page when loaded
+        window.onload = initializeProduct;
+    </script>
+</body>
+</html>

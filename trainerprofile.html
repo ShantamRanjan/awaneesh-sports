@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Profile - John Smith</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --background: #f8fafc;
+            --text: #1f2937;
+            --light: #f3f4f6;
+            --white: #ffffff;
+            --gray: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .profile-sidebar {
+            background: var(--white);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .profile-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .profile-info h1 {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-specialty {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem;
+            background: var(--light);
+            border-radius: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        .profile-main {
+            background: var(--white);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .achievements-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 0.5rem;
+        }
+
+        .achievement-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .time-slot {
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .time-slot.available {
+            border: 2px solid var(--primary);
+            cursor: pointer;
+        }
+
+        .time-slot.available:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .book-button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin-top: 1rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .book-button:hover {
+            background: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav>
+                <a href="trainer.html" style="color: var(--primary); text-decoration: none; font-weight: bold; font-size: 1.5rem;">
+                    Awaneesh Sports
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="profile-container">
+            <aside class="profile-sidebar">
+                <img src="t5.jpeg" alt="John Smith" class="profile-image">
+                <div class="profile-info">
+                    <h1>John Smith</h1>
+                    <p class="profile-specialty">Tennis Coach</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">10+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">4.8</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">150+</div>
+                            <div class="stat-label">Students</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">25</div>
+                            <div class="stat-label">Tournaments</div>
+                        </div>
+                    </div>
+                    <button class="book-button">Book a Session</button>
+                </aside>
+            </aside>
+
+            <div class="profile-main">
+                <section>
+                    <h2 class="section-title">About Me</h2>
+                    <p>Former national player with extensive coaching experience specializing in tennis techniques and strategy. I've trained players of all skill levels, from beginners to competitive athletes. My coaching philosophy focuses on developing strong fundamentals while nurturing each player's unique style.</p>
+                </section>
+
+                <section style="margin-top: 2rem;">
+                    <h2 class="section-title">Achievements & Certifications</h2>
+                    <ul class="achievements-list">
+                        <li class="achievement-item">
+                            <i class="fas fa-trophy achievement-icon"></i>
+                            <div>
+                                <h3>National Tennis Championship</h3>
+                                <p>Winner - 2018</p>
+                            </div>
+                        </li>
+                        <li class="achievement-item">
+                            <i class="fas fa-certificate achievement-icon"></i>
+                            <div>
+                                <h3>PTR Professional Certification</h3>
+                                <p>Professional Tennis Registry</p>
+                            </div>
+                        </li>
+                        <li class="achievement-item">
+                            <i class="fas fa-medal achievement-icon"></i>
+                            <div>
+                                <h3>Elite Coach Certification</h3>
+                                <p>International Tennis Federation</p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section style="margin-top: 2rem;">
+                    <h2 class="section-title">Available Time Slots</h2>
+                    <div class="schedule-grid">
+                        <div class="time-slot available">
+                            <p>Monday</p>
+                            <p>9:00 AM - 10:00 AM</p>
+                        </div>
+                        <div class="time-slot available">
+                            <p>Monday</p>
+                            <p>2:00 PM - 3:00 PM</p>
+                        </div>
+                        <div class="time-slot available">
+                            <p>Wednesday</p>
+                            <p>11:00 AM - 12:00 PM</p>
+                        </div>
+                        <div class="time-slot available">
+                            <p>Thursday</p>
+                            <p>4:00 PM - 5:00 PM</p>
+                        </div>
+                        <div class="time-slot available">
+                            <p>Friday</p>
+                            <p>10:00 AM - 11:00 AM</p>
+                        </div>
+                        <div class="time-slot available">
+                            <p>Saturday</p>
+                            <p>3:00 PM - 4:00 PM</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

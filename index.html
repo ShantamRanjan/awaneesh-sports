@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="web icon" href="/img/newicon.jpeg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="style.css" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tabs = document.querySelectorAll(".tabs button");
+            const emailForm = document.getElementById("email-form");
+            const phoneForm = document.getElementById("phone-form");
+            const socialLogin = document.querySelector(".social-login");
+
+            tabs.forEach(tab => {
+                tab.addEventListener("click", function() {
+                    tabs.forEach(t => t.classList.remove("active"));
+                    tab.classList.add("active");
+
+                    if (tab.textContent === "E-mail") {
+                        emailForm.classList.remove("hidden");
+                        phoneForm.classList.add("hidden");
+                        socialLogin.style.display = "flex";
+                    } else {
+                        phoneForm.classList.remove("hidden");
+                        emailForm.classList.add("hidden");
+                        socialLogin.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="image-section">
+            <img src="/img/running.jpg" alt="Login Image">
+        </div>
+        <div class="form-section">
+            <h2>Login</h2>
+            <div class="tabs">
+                <button class="active">E-mail</button>
+                <button>Phone number</button>
+            </div>
+            <form id="email-form">
+                <div class="form-group">
+                    <label for="email">Enter an email address</label>
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Enter your password</label>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me"> Remember Me </label>
+                </div>
+                <button type="submit" class="btn"><a href="tail3.html">NEXT</a></button>
+            </form>
+            <form id="phone-form" class="hidden">
+                <div class="form-group">
+                    <label for="phone">Enter your phone number</label>
+                    <input type="tel" id="phone" placeholder="Phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="otp">Enter OTP</label>
+                    <input type="text" id="otp" placeholder="One-Time Password" required>
+                </div>
+                <button type="submit" class="btn">NEXT</button>
+            </form>
+            <div class="social-login">
+                <a href="https://accounts.google.com/v3/signin/challenge/pwd?TL=AO-GBTfX3aG3i_6nhGr_P4Hky4NEIcjCHOjgC3cNWvzSWUZQZ-zWPu9oCMJ6WED6&checkConnection=youtube%3A319&checkedDomains=youtube&cid=1&continue=https%3A%2F%2Fwww.google.com%3Fhl%3Den-US&ddm=1&dsh=S-736908508%3A1737485870575622&ec=GAlA8wE&flowEntry=AddSession&flowName=GlifWebSignIn&hl=en&pstMsg=1" target="_blank" title="Sign up with Google">
+                    <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google">
+                </a>
+                <a href="https://www.facebook.com/login/" target="_blank" title="Sign up with Facebook">
+                    <img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://www.icloud.com/" target="_blank" title="Sign up with Apple">
+                    <img src="https://img.icons8.com/ios-filled/48/mac-os.png" alt="Apple">
+                </a>
+            </div>
+            <div class="create-account">
+                No account? <a href="signup.html">Create one!</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

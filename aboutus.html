@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="web icon" href="/img/newicon.jpeg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - SportsPro</title>
+    <style>
+        :root {
+            --primary-color: #0082C3;
+            --secondary-color: #00689B;
+            --accent-color: #FF6B6B;
+            --text-dark: #1A1A1A;
+            --text-light: #666666;
+            --gray-light: #F5F5F5;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin-right: 30%;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .about-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-title {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .about-description {
+            margin-bottom: 20px;
+        }
+
+        .team-section {
+            margin-top: 30px;
+            background-color: var(--gray-light);
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+            .button{
+                background-color: var(--primary-color);
+                color: var(--white);
+                width: 110%;
+                padding: 15px;
+                border: none;
+                border-radius: 12px;
+                font-size: 10px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                margin-left: 35%;
+            }
+        
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="tail3.html" class="logo">Awaneesh Sports</a>
+            <ul class="nav-menu">
+                <li><a href="tail3.html" class="nav-link">Home</a></li>
+                <li><a href="#" class="nav-link">Categories</a></li>
+                <li><a href="try.html" class="nav-link">Products</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="index.html"><button class="button">Sign Up</button></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="about-container">
+        <img src="/api/placeholder/600/500" alt="Awaneesh Sports Team" class="about-image">
+        <div class="about-content">
+            <h1 class="about-title">Our Story</h1>
+            <p class="about-description">
+                Founded in 2023, Awaneesh Sports emerged from a passion for sports and a commitment to providing high-quality equipment for athletes of all levels. Our mission is to empower athletes by offering premium, innovative sports gear that enhances performance and inspires greatness.
+            </p>
+            <p class="about-description">
+                We believe that every athlete deserves top-tier equipment that matches their dedication and drive. From professional athletes to weekend warriors, we're here to support your sporting journey with cutting-edge technology and unmatched quality.
+            </p>
+
+            <div class="team-section">
+                <h2>Meet Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="/api/placeholder/300/300" alt="Awaneesh Founder">
+                        <h3>Awaneesh Kumar</h3>
+                        <p>Founder & CEO</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="/api/placeholder/300/300" alt="Marketing Head">
+                        <h3>Sarah Thompson</h3>
+                        <p>Marketing Director</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="/api/placeholder/300/300" alt="Product Manager">
+                        <h3>Michael Rodriguez</h3>
+                        <p>Product Manager</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

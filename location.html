@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awaneesh sports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f2f2f2;
+        }
+        
+        .header {
+            background-color: #1a73e8;
+            padding: 15px 20px;
+            color: white;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .location-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .location-card h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #f57c00;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: #1a73e8;
+            border: 1px solid #1a73e8;
+            margin-right: 10px;
+        }
+        
+        .btn-outline:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .recent-locations {
+            margin-top: 30px;
+        }
+        
+        .location-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .location-item:hover {
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+        
+        .location-icon {
+            margin-right: 15px;
+            color: #666;
+        }
+        
+        .or-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .or-divider::before,
+        .or-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .or-divider span {
+            padding: 0 10px;
+            color: #666;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Awaneesh sports</h1>
+    </div>
+    
+    <div class="container">
+        <h1>Choose your location</h1>
+        <p>Select a delivery location to see product availability and delivery options</p>
+        
+        <div class="location-card">
+            <h2>Add a new address</h2>
+            <form id="address-form">
+                <div class="input-group">
+                    <label for="pincode">Pincode</label>
+                    <input type="number" id="pincode" placeholder="6-digit Pincode" maxlength="6">
+                </div>
+                
+                <div class="input-group">
+                    <label for="state">State</label>
+                    <select id="state">
+                        <option value="">Select State</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" placeholder="Enter your city">
+                </div>
+                
+                <div class="input-group">
+                    <label for="area">Area, Street, Sector, Village</label>
+                    <input type="text" id="area" placeholder="Enter area">
+                </div>
+                
+                <div class="input-group">
+                    <label for="landmark">Landmark</label>
+                    <input type="text" id="landmark" placeholder="E.g. near Apollo Hospital">
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit" class="btn">Use this address</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="or-divider">
+            <span>OR</span>
+        </div>
+        
+        <button id="geolocate" class="btn btn-outline">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <line x1="12" y1="2" x2="12" y2="22"></line>
+            </svg>
+            Use my current location
+        </button>
+        
+        <div class="recent-locations">
+            <h2>Recent Locations</h2>
+            <div class="location-item">
+                <div class="location-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                </div>
+                <div>
+                    <div><strong>Home</strong></div>
+                    <div>123 Main Street, Indiranagar, Bangalore - 560038</div>
+                </div>
+            </div>
+            <div class="location-item">
+                <div class="location-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                </div>
+                <div>
+                    <div><strong>Office</strong></div>
+                    <div>456 Tech Park, Whitefield, Bangalore - 560066</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2025 SportsFit. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Handle form submission
+        document.getElementById('address-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const pincode = document.getElementById('pincode').value;
+            const state = document.getElementById('state').value;
+            const city = document.getElementById('city').value;
+            
+            if (pincode && state && city) {
+                alert('Address saved successfully! Redirecting to homepage...');
+                // In a real implementation, you would save the address and redirect
+                // window.location.href = '/';
+            } else {
+                alert('Please fill in all required fields (Pincode, State, and City)');
+            }
+        });
+        
+        // Handle geolocation
+        document.getElementById('geolocate').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        // In a real implementation, you would use the coordinates to fetch the address
+                        alert('Location detected! Latitude: ' + position.coords.latitude + 
+                              ', Longitude: ' + position.coords.longitude);
+                    },
+                    function(error) {
+                        alert('Error getting location: ' + error.message);
+                    }
+                );
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        });
+        
+        // Handle clicking on recent locations
+        const locationItems = document.querySelectorAll('.location-item');
+        locationItems.forEach(item => {
+            item.addEventListener('click', function() {
+                alert('Selected saved address. Redirecting to homepage...');
+                // In a real implementation, you would set this address as active and redirect
+                // window.location.href = '/';
+            });
+        });
+    </script>
+</body>
+</html>

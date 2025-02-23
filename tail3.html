@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="web icon" href="/img/newicon.jpeg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/79d8a0ebfd.js" crossorigin="anonymous"></script>
+    <title>Awaneesh Sports</title>
+    <style>
+        ::-webkit-scrollbar{
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track{
+            background-color: white;
+        }
+        ::-webkit-scrollbar-thumb{
+            background-color: #005bb5;
+            border-radius: 20px;
+        }
+
+        :root {
+            --primary-color: #005bb5;
+            --secondary-color: #0082c3;
+            --accent-color: #ff6b6b;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --gray-light: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            align-items: center;
+            margin-left: auto;  /* Push menu to the right */
+        }
+        .nav-link, .nav-link1 {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            margin-left: 0;     /* Remove previous margin */
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        .nav-link1:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section with Categories */
+        .hero-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 30px;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            text-decoration: none;
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 20px;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        /* Featured Products Slider */
+        .featured-slider {
+            position: relative;
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 30px;
+        }
+
+        .slider-container {
+            overflow: hidden;
+            grid-auto-flow: row;
+            
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 20px;
+        }
+
+        .product-card {
+            flex: 0 0 300px;
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            padding: 20px;
+            color: #000;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 0.9em 1.6em;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;     /* Take full width of container */
+            padding: 10px 40px 10px 15px;
+            border: 2px solid var(--gray-light);
+            border-radius: 40px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 35px;    /* Adjust icon position */
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+
+        /* Cart Styles */
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            margin-left: 0px;
+            align-items: flex-end;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-color);
+            color: var(--white);
+            font-size: 12px;
+            padding: 1px 6px;
+            border-radius: 10px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .cart-panel {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+            width: 400px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: -400px;
+            transition: right 0.3s ease-in-out;
+            z-index: 1000;
+            padding: 20px;
+}
+        
+
+        .cart-panel.open {
+            right: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cart-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+        .hero {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: white;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+            color: white;
+            font-size: 24px;
+            border: none;
+        }
+
+        .slider-arrow:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .slider-arrow.prev {
+            left: 20px;
+        }
+
+        .slider-arrow.next {
+            right: 20px;
+        }
+
+
+        .hero-content {
+            max-width: 800px;
+            padding: 30px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section {
+            margin-bottom: 30px;
+        }
+
+        .footer-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--white);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+        }
+              /* New Category Panel Styles */
+              .category-panel {
+                background: var(--gray-light);
+                padding: 15px 0;
+                border-bottom: 1px solid #eee;
+            }
+    
+            .category-list {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 0 30px;
+                list-style: none;
+            }
+    
+            .category-item {
+                position: relative;
+            }
+    
+            .category-link {
+                color: var(--text-dark);
+                text-decoration: none;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                padding: 5px 10px;
+                transition: color 0.3s;
+            }
+    
+            .category-link:hover {
+                color: var(--primary-color);
+            }
+    
+            .category-dropdown {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: var(--white);
+                min-width: 200px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                border-radius: 5px;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(10px);
+                transition: all 0.3s;
+                z-index: 100;
+            }
+    
+            .category-item:hover .category-dropdown {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+    
+            .dropdown-link {
+                display: block;
+                padding: 10px 15px;
+                color: var(--text-dark);
+                text-decoration: none;
+                transition: background-color 0.3s;
+            }
+    
+            .dropdown-link:hover {
+                background-color: var(--gray-light);
+                color: var(--primary-color);
+            }
+    
+            @media (max-width: 768px) {
+                .category-list {
+                    flex-wrap: wrap;
+                    gap: 15px;
+                }
+                
+                .category-item {
+                    flex: 0 0 calc(50% - 15px);
+                }
+    
+                .category-dropdown {
+                    position: static;
+                    opacity: 1;
+                    visibility: visible;
+                    transform: none;
+                    box-shadow: none;
+                    display: none;
+                }
+    
+                .category-item:hover .category-dropdown {
+                    display: block;
+                }
+            }
+            .c-button {
+                color: #000;
+                font-weight: 700;
+                font-size: 16px;
+                padding: 0.9em 1.6em;
+                cursor: pointer;
+                display: inline-block;
+                vertical-align: middle;
+                position: relative;
+                z-index: 1;
+            }
+            .c-button--gooey {
+                color: #005bb5;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                border: 4px solid #005bb5;
+                border-radius: 0;
+                position: relative;
+                transition: all 700ms ease;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .c-button--gooey .c-button__blobs {
+                height: 100%;
+                filter: url(#goo);
+                overflow: hidden;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: -3px;
+                right: -1px;
+                z-index: -1;
+            }
+            .c-button--gooey .c-button__blobs div {
+                background-color: #005bb5;
+                width: 34%;
+                height: 100%;
+                border-radius: 100%;
+                position: absolute;
+                transform: scale(1.4) translateY(125%) translateZ(0);
+                transition: all 700ms ease;
+            }
+            .c-button--gooey .c-button__blobs div:nth-child(1) {
+                left: -5%;
+            }
+            .c-button--gooey .c-button__blobs div:nth-child(2) {
+                left: 30%;
+                transition-delay: 60ms;
+            }
+            .c-button--gooey .c-button__blobs div:nth-child(3) {
+                left: 66%;
+                transition-delay: 25ms;
+            }
+            .c-button--gooey:hover {
+                color: #fff;
+            }
+            .c-button--gooey:hover .c-button__blobs div {
+                transform: scale(1.4) translateY(0) translateZ(0);
+            }
+            .wishlist-heart {
+                display: flex;
+                width: 24px;
+                height: 24px;
+                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>') no-repeat;
+                background-size: cover;
+                cursor: pointer;
+                transition: fill 0.3s ease;
+                margin-left: 10px;
+                vertical-align: middle;
+            }
+            
+            .wishlist-heart.active {
+                fill: red;
+                stroke: red;
+            }
+
+            .location-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 9px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.location-section:hover {
+    background-color: var(--gray-light);
+}
+
+.location-section svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text-dark);
+}
+
+.location-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.location-label {
+    font-size: 12px;
+    color: var(--text-light);
+    text-decoration: none;
+    
+}
+
+.location-name {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 14px;
+    text-decoration: none;
+    
+}
+
+@media (max-width: 768px) {
+    .location-section {
+        display: none;
+    }
+}
+.cart-panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+    width: 400px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -400px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f3f3f3;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.cart-header h3 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--text-dark);
+}
+
+.cart-close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.cart-close-btn:hover {
+    background-color: var(--gray-light);
+    transform: scale(1.1);
+}
+
+.cart-close-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: #131921;
+    stroke-width: 2;
+}
+.cart-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+
+    .cart-item-details {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cart-item-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.cart-item-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    background: var(--gray-light);
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.quantity-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    font-weight: bold;
+    border-top: 1px solid var(--gray-light);
+    margin-top: 15px;
+}
+
+.cart-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.cart-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.cart-btn-checkout {
+    background-color: var(--primary-color);
+}
+
+.cart-btn-continue {
+    background-color: var(--gray-light);
+    color: var(--text-dark);
+}
+
+.cart-btn:hover {
+    opacity: 0.9;
+}
+
+.nav-wrapper {
+            padding: 1px;
+            background: #fff;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .wishlist-wrapper {
+            position: relative;
+        }
+
+        .wishlist-button {
+            position: relative;
+            background: none;
+            border: none;
+            padding: 1px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .wishlist-button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .wishlist-button i {
+            font-size: 1.5rem;
+            color: #ef4444;
+        }
+
+        .wishlist-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ef4444;
+            color: white;
+            font-size: 0.75rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wishlist-dropdown {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            width: 320px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-top: 0.5rem;
+            z-index: 50;
+            display: none;
+        }
+
+        .wishlist-button:focus + .wishlist-dropdown,
+        .wishlist-dropdown:hover {
+            display: block;
+        }
+
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-header h3 {
+            font-size: 1rem;
+            color: #374151;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6b7280;
+            padding: 0.5rem;
+        }
+
+        .close-button:hover {
+            color: #374151;
+        }
+
+        .wishlist-items {
+            padding: 2rem;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .empty-message {
+            font-size: 0.875rem;
+        }
+
+        .empty-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #9ca3af;
+        }
+        .featured-products {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 30px;
+}
+
+.featured-products h2 {
+    margin-bottom: 30px;
+}
+
+.products-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.products-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1024px) {
+    .products-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .products-row {
+        grid-template-columns: 1fr;
+    }
+}
+.cart-item {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    gap: 10px;
+}
+
+.cart-item-details {
+    display: flex;
+    gap: 15px;
+}
+
+.cart-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.cart-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.cart-item-price {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.cart-item-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    background: var(--gray-light);
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.quantity-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.remove-item:hover {
+    color: #ff4444;
+}
+
+.cart-item-subtotal {
+    font-weight: 500;
+    text-align: right;
+    color: var(--text-dark);
+}
+
+.empty-cart-message {
+    text-align: center;
+    color: var(--text-light);
+    padding: 20px;
+}
+            
+    </style>
+</head>
+<body>
+
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">Awaneesh Sports</a>
+            
+<!-- Add this inside the .nav-container, adjusting the order to match Amazon's layout -->
+<div class="location-section">
+    <a
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M78.81,82.78c-4.35,4.77-9.42,9.05-15.12,12.51c-0.7,0.51-1.65,0.58-2.43,0.08 c-8.41-5.35-15.48-11.78-21.03-18.76c-7.66-9.61-12.49-20.27-14.14-30.53c-1.68-10.41-0.11-20.42,5.07-28.56 c2.04-3.22,4.65-6.15,7.83-8.68C46.3,3.01,54.65-0.06,62.96,0c8.01,0.06,15.91,3.05,22.74,9.28c2.4,2.18,4.42,4.68,6.07,7.39 c5.57,9.17,6.77,20.87,4.32,32.73c-2.41,11.71-8.41,23.62-17.28,33.35V82.78L78.81,82.78L78.81,82.78z M25.32,74.54 c1.98,0,3.59,1.61,3.59,3.59c0,1.98-1.61,3.59-3.59,3.59h-6.74l-8.88,28.67h103.22l-9.64-28.67h-5.57c-1.98,0-3.59-1.61-3.59-3.59 c0-1.98,1.61-3.59,3.59-3.59h10.7l14.46,43.01H0l13.32-43.01H25.32L25.32,74.54z M61.38,18.51c9.88,0,17.88,8.01,17.88,17.87 c0,9.88-8.01,17.88-17.88,17.88c-9.88,0-17.87-8-17.87-17.88C43.49,26.51,51.5,18.51,61.38,18.51L61.38,18.51L61.38,18.51z"/>
+    </svg>
+    <div class="location-text">
+        <span class="location-label"><a href="location.html">Deliver to</a></span>
+        <span class="location-name"><a href="location.html">Your Location</a></span>
+    </div>
+</div>
+
+        </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search for sports equipment...">
+                <svg class="search-icon" width="-390" height="20" viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="trainer.html" class="nav-link">Trainer</a></li>
+                <li><a href="locatestore.html" class="nav-link">Locate Store</a></li>
+                <li><a href="track order.html" class="nav-link">Track Order</a></li>
+                <li><a href="index.html" class="nav-link1">Sign In</a></li>
+                <div class="nav-wrapper">
+                    <div class="wishlist-wrapper">
+                        <button class="wishlist-button">
+                            <i class="fas fa-heart"></i>
+                            <span class="wishlist-count">0</span>
+                        </button>
+                        
+                        <div class="wishlist-dropdown">
+                            <div class="dropdown-header">
+                                <h3>My Wishlist (0)</h3>
+                                <button class="close-button">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="wishlist-items">
+                                <div class="empty-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <p class="empty-message">Your wishlist is empty</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <li>
+                    <div class="cart-icon" id="cartToggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 20a1 1 0 100 2 1 1 0 000-2zm7 0a1 1 0 100 2 1 1 0 000-2zm-7-4h7a2 2 0 002-2V6a2 2 0 00-2-2H9a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        <span class="cart-badge">0</span>
+                    </div>
+                </li>   
+            </ul>       
+        </nav>
+    </header>
+         <!-- New Category Panel -->
+         <div class="category-panel">
+            <ul class="category-list">
+                <li class="category-item">
+                    <a href="all.html" class="category-link">
+                        Tennis
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </a>
+                    <div class="category-dropdown">
+                        <a href="all.html" class="dropdown-link">Rackets</a>
+                        <a href="all.html" class="dropdown-link">Balls</a>
+                        <a href="all.html" class="dropdown-link">Accessories</a>
+                        <a href="all.html" class="dropdown-link">Apparel</a>
+                    </div>
+                </li>
+                <li class="category-item">
+                    <a href="all.html" class="category-link">
+                        Basketball
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </a>
+                    <div class="category-dropdown">
+                        <a href="all.html" class="dropdown-link">Balls</a>
+                        <a href="all.html" class="dropdown-link">Hoops</a>
+                        <a href="all.html" class="dropdown-link">Training Equipment</a>
+                        <a href="all.html" class="dropdown-link">Jerseys</a>
+                    </div>
+                </li>
+                <li class="category-item">
+                    <a href="all.html" class="category-link">
+                        Football
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </a>
+                    <div class="category-dropdown">
+                        <a href="all.html" class="dropdown-link">Balls</a>
+                        <a href="all.html" class="dropdown-link">Cleats</a>
+                        <a href="all.html" class="dropdown-link">Protective Gear</a>
+                        <a href="all.html" class="dropdown-link">Team Wear</a>
+                    </div>
+                </li>
+                <li class="category-item">
+                    <a href="all.html" class="category-link">
+                        Running
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </a>
+                    
+                    <div class="category-dropdown">
+                        <a href="all.html" class="dropdown-link">Shoes</a>
+                        <a href="all.html" class="dropdown-link">Apparel</a>
+                        <a href="all.html" class="dropdown-link">Accessories</a>
+                        <a href="all.html" class="dropdown-link">Electronics</a>
+                    </div>
+                </li>
+                <li class="category-item">
+                    <a href="all.html" class="category-link">
+                        Fitness
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </a>
+                    <div class="category-dropdown">
+                        <a href="all.html" class="dropdown-link">Weights</a>
+                        <a href="all.html" class="dropdown-link">Yoga</a>
+                        <a href="all.html" class="dropdown-link">Equipment</a>
+                        <a href="all.html" class="dropdown-link">Accessories</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    <section class="hero">
+        <div class="slider">
+            <div class="slide active" style="background-image: url('/img/baskethoop.jpg')"></div>
+            <div class="slide" style="background-image: url('/img/running.jpg')"></div>
+            <div class="slide" style="background-image: url('/img/football2.jpg')"></div>
+            <div class="slide" style="background-image: url('/img/racket.jpg')"></div>
+        </div>
+        <button class="slider-arrow prev">&#10094;</button>
+        <button class="slider-arrow next">&#10095;</button>
+        <div class="slider-controls">
+            <div class="slider-dot active"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to Awaneesh Sports</h1>
+            <p class="hero-subtitle">Discover premium sports equipment for champions</p>
+        </div>
+    </section>
+
+    <!-- Categories Grid -->
+    <section class="hero-categories">
+        <div class="category-card">
+            <a href="all.html"><img src="/img/racket.jpg" alt="Tennis" class="category-image" a href=></a>
+            <div class="category-overlay">
+                <h3>Tennis</h3>
+            </div>
+        </div>
+        <div class="category-card">
+            <a href="all.html"><img src="/img/baskethoop.jpg" alt="Basketball" class="category-image"></a>
+            <div class="category-overlay">
+                <h3>Basketball</h3>
+            </div>
+        </div>
+        <div class="category-card">
+            <a href="all.html"><img src="/img/football2.jpg" alt="Football" class="category-image"></a>
+            <div class="category-overlay">
+                <h3>Football</h3>
+            </div>
+        </div>
+        <div class="category-card">
+            <a href="all.html"><img src="/img/football2.jpg" alt="Football" class="category-image"></a>
+            <div class="category-overlay">
+                <h3>Badminton</h3>
+            </div>
+        </div>
+        <div class="category-card">
+            <a href="all.html"><img src="/img/football2.jpg" alt="Football" class="category-image"></a>
+            <div class="category-overlay">
+                <h3>Cricket</h3>
+            </div>
+        </div>
+        <div class="category-card">
+            <a href="all.html"></a><img src="/img/running.jpg" alt="Running" class="category-image">
+            <div class="category-overlay">
+                <h3>Running</h3>
+            </div>
+        </div>
+        
+    </section>
+
+    <!-- Featured Products Slider -->
+    <!-- Featured Products Section -->
+<section class="featured-products">
+    <h2>Featured Products</h2>
+    <div class="products-container">
+        <div class="products-row" id="productsRowOne">
+            
+        </div>
+        <div class="products-row" id="productsRowTwo">
+            <!-- Next 4 products will be inserted here -->
+        </div>
+    </div>
+</section>
+
+    <!-- Cart Panel -->
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close-btn" onclick="toggleCart()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-total">
+            <span>Total</span>
+            <span id="cartTotalAmount">$0.00</span>
+        </div>
+        <div class="cart-actions">
+            <button class="cart-btn cart-btn-continue" onclick="continueShopping()">Continue Shopping</button>
+            <button class="cart-btn cart-btn-checkout" onclick="proceedToCheckout()"><a href="adress.html">Proceed to Checkout</a></button>
+        </div>
+    </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">About Us</h3>
+                <p style="color: #999; line-height: 1.6;">
+                    Awaneesh Sports is your premier destination for high-quality sports equipment and gear. We're committed to helping athletes achieve their best performance.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="tail3.html" class="footer-link">Home</a></li>
+                    <li><a href="all.html" class="footer-link">Products</a></li>
+                    <li><a href="aboutus.html" class="footer-link">About Us</a></li>
+                    <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="all.html" class="footer-link">Tennis</a></li>
+                    <li><a href="all.html" class="footer-link">Basketball</a></li>
+                    <li><a href="all.html" class="footer-link">Football</a></li>
+                    <li><a href="all.html" class="footer-link">Running</a></li>
+                    <li><a href="all.html" class="footer-link">Fitness</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Contact Info</h3>
+                <ul class="footer-links">
+                    <li class="footer-link">123 Sports Street</li>
+                    <li class="footer-link">New York, NY 10001</li>
+                    <li class="footer-link">Phone: (555) 123-4567</li>
+                    <li class="footer-link">Email: info@awaneeshsports.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Awaneesh Sports. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample product data
+        // Sample product data
+const products = [
+{
+    id: 1,
+    name: "Professional Tennis Racket",
+    price: 199.99,
+    image: "/img/racketprod.jpg"
+},
+{
+    id: 2,
+    name: "Premium Basketball",
+    price: 89.99,
+    image: "/img/basketball.jpeg"
+},
+{
+    id: 3,
+    name: "Running Shoes Elite",
+    price: 159.99,
+    image: "/img/shoe.jpeg"
+},
+{
+    id: 4,
+    name: "Football Pro Series",
+    price: 49.99,
+    image: "/img/football1.jpeg"
+},
+{
+    id: 5,
+    name: "Football Pro Series",
+    price: 49.99,
+    image: "foot.jpg"
+},
+{
+    id: 6,
+    name: "Football Pro Series",
+    price: 49.99,
+    image: "foot.jpg"
+},
+{
+    id: 7,
+    name: "Football Pro Series",
+    price: 49.99,
+    image: "foot.jpg"
+},
+{
+    id: 8,
+    name: "Football Pro Series",
+    price: 49.99,
+    image: "foot.jpg"
+},
+];
+
+// Cart and Wishlist functionality
+
+let wishlist = [];
+
+// Initialize products in slider
+const productSlider = document.getElementById('productSlider');
+
+function renderProducts() {
+const productsRowOne = document.getElementById('productsRowOne');
+const productsRowTwo = document.getElementById('productsRowTwo');
+
+// Clear existing products
+productsRowOne.innerHTML = '';
+productsRowTwo.innerHTML = '';
+
+// Render first 4 products
+products.slice(0, 4).forEach(product => {
+    const productCard = createProductCard(product);
+    productsRowOne.appendChild(productCard);
+});
+
+// Render next 4 products
+products.slice(4, 8).forEach(product => {
+    const productCard = createProductCard(product);
+    productsRowTwo.appendChild(productCard);
+});
+}
+
+function createProductCard(product) {
+const productCard = document.createElement('div');
+productCard.className = 'product-card';
+
+// Create the main clickable container
+const productLink = document.createElement('div');
+productLink.style.cursor = 'pointer';
+productLink.addEventListener('click', (e) => {
+    // Prevent navigation if clicking on buttons
+    if (!e.target.closest('.c-button') && !e.target.closest('.wishlist-heart')) {
+        window.location.href = `product.html?id=${product.id}`;
+    }
+});
+
+productLink.innerHTML = `
+    <img src="${product.image}" alt="${product.name}" class="product-image">
+    <div class="product-details">
+        <h3 class="product-title">${product.name}</h3>
+        <p class="product-price">$${product.price}</p>
+        <div>
+            <button class="c-button c-button--gooey" onclick="addToCart(${product.id})">
+                Add to Cart
+                <div class="c-button__blobs">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </button>
+            <div class="wishlist-heart" onclick="toggleWishlist(${product.id})"></div>
+        </div>
+    </div>
+`;
+
+productCard.appendChild(productLink);
+return productCard;
+}
+
+// Optional: Add function to handle URL parameters on product page
+let cart = [];
+
+// Function to add items to cart
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            ...product,
+            quantity: 1
+        });
+    }
+    
+    updateCartDisplay();
+    updateCartBadge();
+}
+
+// Function to update quantity
+function updateQuantity(productId, change) {
+    const cartItem = cart.find(item => item.id === productId);
+    if (!cartItem) return;
+
+    cartItem.quantity += change;
+    
+    if (cartItem.quantity <= 0) {
+        // Remove item if quantity becomes 0
+        cart = cart.filter(item => item.id !== productId);
+    }
+    
+    updateCartDisplay();
+    updateCartBadge();
+}
+
+// Function to remove item from cart
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCartDisplay();
+    updateCartBadge();
+}
+
+// Function to update cart display
+function updateCartDisplay() {
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotalAmount');
+    
+    cartItemsContainer.innerHTML = '';
+    
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="empty-cart-message">Your cart is empty</p>';
+        cartTotal.textContent = '$0.00';
+        return;
+    }
+
+    let total = 0;
+
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+            <div class="cart-item-details">
+                <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                <div class="cart-item-info">
+                    <span class="cart-item-name">${item.name}</span>
+                    <span class="cart-item-price">$${item.price.toFixed(2)}</span>
+                </div>
+            </div>
+            <div class="cart-item-controls">
+                <div class="cart-item-quantity">
+                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                </div>
+                <button class="remove-item" onclick="removeFromCart(${item.id})">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="cart-item-subtotal">
+                Subtotal: $${itemTotal.toFixed(2)}
+            </div>
+        `;
+        
+        cartItemsContainer.appendChild(cartItem);
+    });
+
+    cartTotal.textContent = `$${total.toFixed(2)}`;
+}
+
+// Function to update cart badge
+function updateCartBadge() {
+    const cartBadge = document.querySelector('.cart-badge');
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartBadge.textContent = totalItems;
+    cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+}
+
+// Function to toggle cart panel
+function toggleCart() {
+    const cartPanel = document.getElementById('cartPanel');
+    cartPanel.style.right = cartPanel.style.right === '0px' ? '-400px' : '0px';
+}
+
+// Function to continue shopping
+function continueShopping() {
+    toggleCart();
+}
+
+// Function to proceed to checkout
+function proceedToCheckout() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+    window.location.href = 'checkout.html';
+}
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize cart display
+    updateCartDisplay();
+    updateCartBadge();
+    
+    // Cart toggle button
+    const cartToggle = document.getElementById('cartToggle');
+    cartToggle.addEventListener('click', toggleCart);
+    
+    // Close cart when clicking outside
+    document.addEventListener('click', (event) => {
+        const cartPanel = document.getElementById('cartPanel');
+        const cartToggle = document.getElementById('cartToggle');
+        
+        if (!cartPanel.contains(event.target) && 
+            !cartToggle.contains(event.target)) {
+            cartPanel.style.right = '-400px';
+        }
+    });
+});
+// Initialize products on page load
+document.addEventListener('DOMContentLoaded', renderProducts);
+    </script>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo"></feColorMatrix>
+                <feBlend in="SourceGraphic" in2="goo"></feBlend>
+            </filter>
+        </defs>
+    </svg>
+
+</body>
+</html>

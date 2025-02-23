@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="web icon" href="/img/newicon.jpeg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Locator - Awaneesh Sports Pune</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    
+    <style>
+        :root {
+            --primary-color: #00b0f0;
+            --secondary-color: #0082c3;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --gray-light: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        .store-locator-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            height: calc(100vh - 80px);
+            position: relative;
+        }
+
+        .store-sidebar {
+            background: var(--white);
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid #eee;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .store-list {
+            list-style: none;
+        }
+
+        .store-item {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .store-item:hover {
+            background: var(--gray-light);
+            transform: translateY(-2px);
+        }
+
+        .store-item.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .store-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .store-address {
+            font-size: 14px;
+            color: inherit;
+            opacity: 0.8;
+        }
+
+        .store-phone {
+            font-size: 14px;
+            color: inherit;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .store-hours {
+            font-size: 13px;
+            color: inherit;
+            opacity: 0.8;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .store-popup {
+            font-size: 14px;
+        }
+
+        .store-popup h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .store-popup p {
+            margin: 5px 0;
+        }
+
+        .directions-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .directions-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .store-locator-container {
+                grid-template-columns: 1fr;
+            }
+
+            .store-sidebar {
+                height: 200px;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+        }
+        ::-webkit-scrollbar{
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track{
+            background-color: white;
+        }
+        ::-webkit-scrollbar-thumb{
+            background-color: #005bb5;
+            border-radius: 20px;
+        }
+
+        :root {
+            --primary-color: #005bb5;
+            --secondary-color: #0082c3;
+            --accent-color: #ff6b6b;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --gray-light: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-bar {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            align-items: center;
+            margin-left: auto;  /* Push menu to the right */
+        }
+        .nav-link, .nav-link1 {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            margin-left: 0;     /* Remove previous margin */
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        .nav-link1:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section with Categories */
+        .hero-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 30px;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 20px;
+            color: var(--white);
+        }
+
+        /* Featured Products Slider */
+        .featured-slider {
+            position: relative;
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 30px;
+        }
+
+        .slider-container {
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 20px;
+        }
+
+        .product-card {
+            flex: 0 0 300px;
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            padding: 20px;
+            color: #000;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 0.9em 1.6em;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;     /* Take full width of container */
+            padding: 10px 40px 10px 15px;
+            border: 2px solid var(--gray-light);
+            border-radius: 40px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 35px;    /* Adjust icon position */
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+
+        /* Cart Styles */
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            margin-left: 0px;
+            align-items: flex-end;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-color);
+            color: var(--white);
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .cart-panel {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+            width: 400px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: -400px;
+            transition: right 0.3s ease-in-out;
+            z-index: 1000;
+            padding: 20px;
+}
+        
+
+        .cart-panel.open {
+            right: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cart-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="tail3.html" class="logo">Awaneesh Sports</a>
+            
+<!-- Add this inside the .nav-container, adjusting the order to match Amazon's layout -->
+<div class="location-section">
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M78.81,82.78c-4.35,4.77-9.42,9.05-15.12,12.51c-0.7,0.51-1.65,0.58-2.43,0.08 c-8.41-5.35-15.48-11.78-21.03-18.76c-7.66-9.61-12.49-20.27-14.14-30.53c-1.68-10.41-0.11-20.42,5.07-28.56 c2.04-3.22,4.65-6.15,7.83-8.68C46.3,3.01,54.65-0.06,62.96,0c8.01,0.06,15.91,3.05,22.74,9.28c2.4,2.18,4.42,4.68,6.07,7.39 c5.57,9.17,6.77,20.87,4.32,32.73c-2.41,11.71-8.41,23.62-17.28,33.35V82.78L78.81,82.78L78.81,82.78z M25.32,74.54 c1.98,0,3.59,1.61,3.59,3.59c0,1.98-1.61,3.59-3.59,3.59h-6.74l-8.88,28.67h103.22l-9.64-28.67h-5.57c-1.98,0-3.59-1.61-3.59-3.59 c0-1.98,1.61-3.59,3.59-3.59h10.7l14.46,43.01H0l13.32-43.01H25.32L25.32,74.54z M61.38,18.51c9.88,0,17.88,8.01,17.88,17.87 c0,9.88-8.01,17.88-17.88,17.88c-9.88,0-17.87-8-17.87-17.88C43.49,26.51,51.5,18.51,61.38,18.51L61.38,18.51L61.38,18.51z"/>
+    </svg>
+    <div class="location-text">
+        <span class="location-label">Deliver to</span>
+        <span class="location-name">Your Location</span>
+    </div>
+</div>
+
+        </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search for sports equipment...">
+                <svg class="search-icon" width="-390" height="20" viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="locatestore.html" class="nav-link">Locate Store</a></li>
+                <li><a href="track order.html" class="nav-link">Track Order</a></li>
+                <li><a href="index.html" class="nav-link1">Sign In</a></li>
+                <li><a href="#" class="nav-link1">WishList</a></li>
+                <li>
+                    <div class="cart-icon" id="cartToggle">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 20a1 1 0 100 2 1 1 0 000-2zm7 0a1 1 0 100 2 1 1 0 000-2zm-7-4h7a2 2 0 002-2V6a2 2 0 00-2-2H9a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        <span class="cart-badge">0</span>
+                    </div>
+                </li>
+                
+            </ul>       
+        </nav>
+    </header>
+    <div class="store-locator-container">
+        <div class="store-sidebar">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Enter area or PIN code" id="locationSearch">
+            </div>
+            <ul class="store-list" id="storeList"></ul>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script>
+        // Pune store locations
+        const stores = [
+            {
+                id: 1,
+                name: "Awaneesh Sports - FC Road",
+                lat: 18.5204,
+                lng: 73.8467,
+                address: "123 FC Road, near Fergusson College, Pune 411004",
+                phone: "020-2556-0123",
+                hours: "10:00 AM - 9:00 PM"
+            },
+            {
+                id: 2,
+                name: "Awaneesh Sports - Aundh",
+                lat: 18.5589,
+                lng: 73.8075,
+                address: "Bremen Chowk, ITI Road, Aundh, Pune 411007",
+                phone: "020-2556-0124",
+                hours: "9:30 AM - 8:30 PM"
+            },
+            {
+                id: 3,
+                name: "Awaneesh Sports - Hadapsar",
+                lat: 18.5089,
+                lng: 73.9259,
+                address: "Magarpatta City, Hadapsar, Pune 411028",
+                phone: "020-2556-0125",
+                hours: "10:00 AM - 9:00 PM"
+            },
+            {
+                id: 4,
+                name: "Awaneesh Sports - Hinjewadi",
+                lat: 18.5913,
+                lng: 73.7389,
+                address: "Near Wipro Circle, Hinjewadi Phase 1, Pune 411057",
+                phone: "020-2556-0126",
+                hours: "10:30 AM - 8:30 PM"
+            },
+            {
+                id: 5,
+                name: "Awaneesh Sports - Kothrud",
+                lat: 18.5074,
+                lng: 73.8077,
+                address: "Karve Road, Kothrud, Pune 411038",
+                phone: "020-2556-0127",
+                hours: "10:00 AM - 9:00 PM"
+            },
+            {
+                id: 6,
+                name: "Awaneesh Sports - Viman Nagar",
+                lat: 18.5679,
+                lng: 73.9143,
+                address: "Phoenix Market City, Viman Nagar, Pune 411014",
+                phone: "020-2556-0128",
+                hours: "11:00 AM - 9:30 PM"
+            }
+        ];
+
+        // Initialize map centered on Pune
+        const map = L.map('map').setView([18.5204, 73.8567], 12);
+
+        // Add tile layer (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Store markers array
+        const markers = [];
+
+        // Create store list and markers
+        function initializeStores() {
+            const storeList = document.getElementById('storeList');
+            
+            stores.forEach(store => {
+                // Create list item
+                const li = document.createElement('li');
+                li.className = 'store-item';
+                li.innerHTML = `
+                    <div class="store-name">${store.name}</div>
+                    <div class="store-address">${store.address}</div>
+                    <div class="store-phone">${store.phone}</div>
+                    <div class="store-hours">${store.hours}</div>
+                `;
+                
+                // Add click event
+                li.addEventListener('click', () => {
+                    highlightStore(store.id);
+                    map.setView([store.lat, store.lng], 15);
+                });
+                
+                storeList.appendChild(li);
+
+                // Create marker
+                const marker = L.marker([store.lat, store.lng])
+                    .bindPopup(`
+                        <div class="store-popup">
+                            <h3>${store.name}</h3>
+                            <p>${store.address}</p>
+                            <p>${store.phone}</p>
+                            <p><i>${store.hours}</i></p>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=${store.lat},${store.lng}" 
+                               class="directions-btn" target="_blank">Get Directions</a>
+                        </div>
+                    `)
+                    .addTo(map);
+                
+                markers.push({
+                    id: store.id,
+                    marker: marker
+                });
+            });
+        }
+
+        // Highlight selected store
+        function highlightStore(storeId) {
+            const storeItems = document.querySelectorAll('.store-item');
+            storeItems.forEach(item => item.classList.remove('active'));
+            
+            const selectedStore = stores.find(store => store.id === storeId);
+            if (selectedStore) {
+                const storeIndex = stores.indexOf(selectedStore);
+                storeItems[storeIndex].classList.add('active');
+            }
+        }
+
+        // Search functionality
+        document.getElementById('locationSearch').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const storeItems = document.querySelectorAll('.store-item');
+            
+            stores.forEach((store, index) => {
+                const matchesSearch = 
+                    store.name.toLowerCase().includes(searchTerm) ||
+                    store.address.toLowerCase().includes(searchTerm);
+                
+                storeItems[index].style.display = matchesSearch ? 'block' : 'none';
+            });
+        });
+
+        // Initialize stores
+        initializeStores();
+    </script>
+</body>
+</html>
